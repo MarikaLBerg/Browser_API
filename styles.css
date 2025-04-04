@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url("notes.jpg");
+    background-size: cover; /* Заставляет изображение покрывать весь фон */
+    background-position: center; /* Центрирует изображение */
+    background-color: #f0f0f0; /* Цвет фона, если изображение не загрузится */
+  }
+  h1 {
+    margin-bottom: 350px;
+    color: rgb(34, 23, 23);
+  }
+  #drop-area {
+    border: 2px dashed #34485d;
+    border-radius: 10px;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    background-color: rgba(
+      239,
+      235,
+      235,
+      0.8
+    ); /* Полупрозрачный фон для drop area */
+  }
+  #drop-area.hover {
+    border-color: #0056b3;
+  }
+  #audio-player {
+    display: none; /* Скрываем плеер по умолчанию */
+  }
+  

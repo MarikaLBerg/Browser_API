@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Audio Upload and Player</title>
+    
+  </head>
+  <body>
+    <h1>Загрузите аудиофайл</h1>
+    <div id="drop-area">Перетащите файл сюда</div>
+    <audio id="audio-player" controls></audio>
+
+    <script>
+      const dropArea = document.getElementById("drop-area");
+      const audioPlayer = document.getElementById("audio-player");
+
+      // Предотвращаем стандартное поведение при перетаскивании
+      ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+      });
+
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      // Добавляем классы при перетаскивании
+      ["dragenter", "dragover"].forEach((eventName) => {
+        dropArea.addEventListener(
+          eventName,
+          () => dropArea.classList.add("hover"),
+          false
+        );
+      });
+
+      ["dragleave", "drop"].forEach((eventName) => {
+        dropArea.addEventListener(
+          eventName,
+          () => dropArea.classList.remove("hover"),
+          false
+        );
+      });
+
+      // Обработка события "drop"
+      dropArea.addEventListener("drop", handleDrop, false);
+
+      function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+
+        if (files.length > 0) {
+          const file = files[0];
+          playAudio(file);
+        }
+      }
+
+      function playAudio(file) {
+        const url = URL.createObjectURL(file);
+        audioPlayer.src = url;
+        audioPlayer.style.display = "block"; // Показываем плеер
+        audioPlayer.play();
+      }
+    </script>
+  </body>
+</html>
